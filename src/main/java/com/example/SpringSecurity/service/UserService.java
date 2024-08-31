@@ -10,4 +10,6 @@ public interface UserService {
     List<User> showList();
 
     User login(String userName, String passWord);
+
+    void deleteUser(int id);
 }

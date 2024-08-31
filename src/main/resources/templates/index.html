@@ -9,7 +9,7 @@
     <style>
         a {
             text-decoration: none;
-            color: #000;
+            color: #fff;
             transition: all 0.5s ease-in;
         }
 
@@ -25,6 +25,18 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+        }
+
+        .dash-board {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            background-color: #000;
+            color: #fff;
+            margin-top: 20px;
         }
 
         .infor {
@@ -100,8 +112,8 @@
         <h1 class="text-center">Long Web</h1>
         <div class="infor">
             <p>
-                <span th:if="${session.userName != null}">
-                    Hello,<span th:text="${session.userName}"></span>
+                <span th:if="${session.firstName != null}">
+                    Hello,<span th:text="${session.firstName}"></span>
                 </span>
             </p>
             <button class="btn btn-primary">
@@ -111,17 +123,16 @@
         </div>
 
     </header>
-
-    <div class="container text-center d-flex flex-column p-5">
+    <div class="text-center p-5 dash-board">
         <a href="/show-login">Login</a>
         <a href="/show-register" class="text-center">Register</a>
-        <a href="/show-list" class="text-center">Show all User</a>
+        <a href="/user/show-list" class="text-center">Show all User</a>
     </div>
 
     <div class="logout-form">
         <p>
-            <span th:if="${session.userName != null}">
-                Bye Bye,<span th:text="${session.userName}"></span>
+            <span th:if="${session.firstName != null}">
+                Bye Bye,<span th:text="${session.firstName}"></span>
             </span>
         </p>
         <form class="form-logout" action="/logout" method="post">

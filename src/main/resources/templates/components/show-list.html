@@ -10,7 +10,7 @@
     <style>
         a {
             text-decoration: none;
-
+            color: #fff;
         }
     </style>
 </head>
@@ -31,6 +31,19 @@
                     <td th:text="${user.userName}"></td>
                     <td th:text="${user.firstName}"></td>
                     <td th:text="${user.lastName}"></td>
+                    <td th:if="${session.roleUser == 'ADMIN'}">
+                        <!-- th:href="@{/admin/edit/{id}(id=${user.id})}" -->
+                        <button class="btn btn-primary">
+                            <a>Edit</a>
+                        </button>
+                        <form th:action="@{/admin/delete/{id}(id=${user.id})}" method="post">
+                            <button class="btn btn-danger" type="submit" th:onclick="return confirm('Are you sure?')">
+                                Delete
+                            </button>
+                        </form>
+
+
+                    </td>
                 </tr>
             </tbody>
         </table>

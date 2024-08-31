@@ -12,29 +12,30 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/show-register", "/register", "/show-list", "/show-login", "/login")
-                        .permitAll()
-                        .anyRequest().authenticated())
-                .formLogin(form -> form
-                        .loginPage("/show-login") 
-                        .permitAll()
-                        .defaultSuccessUrl("/") 
-                        .failureUrl("/show-login?error=true") 
-                )
-                .logout(logout -> logout
-                        .logoutSuccessUrl("/") 
-                        .permitAll());
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                http
+                                .csrf().disable()
+                                .authorizeHttpRequests(auth -> auth
+                                                .requestMatchers("/", "/show-register", "/register", "/show-login",
+                                                                "/login", "/user/**")
+                                                .permitAll()
+                                                .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                                                .anyRequest().authenticated())
+                                .formLogin(form -> form
+                                                .loginPage("/show-login")
+                                                .permitAll()
+                                                .defaultSuccessUrl("/")
+                                                .failureUrl("/show-login?error=true"))
+                                .logout(logout -> logout
+                                                .logoutSuccessUrl("/")
+                                                .permitAll());
 
-        return http.build();
-    }
+                return http.build();
+        }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 }
