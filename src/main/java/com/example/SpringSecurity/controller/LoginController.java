@@ -43,7 +43,7 @@ public class LoginController {
     @PostMapping("/register")
     public String handleRegister(User user) {
         userService.addUser(user);
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @PostMapping("/login")
@@ -62,10 +62,12 @@ public class LoginController {
         }
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @PostMapping("/logout")
     public String handleLogOut(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        System.out.println(user + "out website");
         session.invalidate();
-        return "redirect:/";
+        return "redirect:/show-login";
     }
 
 }

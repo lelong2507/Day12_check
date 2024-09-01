@@ -12,6 +12,12 @@
             text-decoration: none;
             color: #fff;
         }
+
+        .admin-part{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
     </style>
 </head>
 
@@ -32,15 +38,18 @@
                     <td th:text="${user.firstName}"></td>
                     <td th:text="${user.lastName}"></td>
                     <td th:if="${session.roleUser == 'ADMIN'}">
-                        <!-- th:href="@{/admin/edit/{id}(id=${user.id})}" -->
-                        <button class="btn btn-primary">
-                            <a>Edit</a>
-                        </button>
-                        <form th:action="@{/admin/delete/{id}(id=${user.id})}" method="post">
-                            <button class="btn btn-danger" type="submit" th:onclick="return confirm('Are you sure?')">
-                                Delete
+                        <div class="admin-part">
+                            <button class="btn btn-primary">
+                                <a>Edit</a>
                             </button>
-                        </form>
+                            <form th:action="@{/admin/delete/{id}(id=${user.id})}" method="post">
+                                <button class="btn btn-danger" type="submit"
+                                    th:onclick="return confirm('Are you sure?')">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                        <!-- th:href="@{/admin/edit/{id}(id=${user.id})}" -->
 
 
                     </td>

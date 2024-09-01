@@ -82,7 +82,7 @@
 
         .form-logout {
             display: flex;
-            gap: 10px;
+            gap: 40px;
             align-items: center;
             justify-content: center;
             padding: 10px;
@@ -99,6 +99,11 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
             }
+        }
+
+        .btn-sovling {
+            display: flex;
+            gap: 40px;
         }
     </style>
     <title>Document</title>
@@ -135,20 +140,24 @@
                 Bye Bye,<span th:text="${session.firstName}"></span>
             </span>
         </p>
-        <form class="form-logout" action="/logout" method="post">
-            <button class="btn btn-danger">
-                <a>Logout now</a>
+        <div class="btn-sovling">
+            <!-- <form class="form-logout" action="/logout" method="post"> -->
+            <button class="btn btn-danger" type="submit">
+                <a th:href="@{/logout}">Logout now</a>
             </button>
-            <button class="btn btn-primary">
-                <a id="cancel-logout">Cancel</a>
+            <button class="btn btn-primary cancel-logout">
+                Cancel
             </button>
-        </form>
+            <!-- </form> -->
+
+        </div>
+
     </div>
     <script>
         let showLogout = document.getElementById('show-logout');
         let formLogout = document.querySelector('.logout-form');
         let overLay = document.querySelector('.overlay');
-        let cancelLogout = document.getElementById('cancel-logout');
+        let cancelLogout = document.querySelector('.cancel-logout');
         showLogout.onclick = () => {
             formLogout.classList.toggle('show');
             overLay.classList.add('show');

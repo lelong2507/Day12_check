@@ -10,7 +10,16 @@ class SpringSecurityApplicationTests {
 
 	@Test
 	void contextLoads() {
-		assertEquals(1, 1);
+		testAdd();
 	}
 
+	@Test
+	void testAdd(){
+		int a = 4;
+		int b = 5;
+
+		int resutl = a + b;
+
+		assertEquals(resutl, 9);
+	}
 }
